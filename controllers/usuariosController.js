@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const bcrypt = require('bcrypt');
 
 usuariosController = {
     index: (req, res) => {
@@ -7,6 +8,9 @@ usuariosController = {
     },
     cadastro: (req, res) => {
         let {nome,email,senha} = req.body;
+
+        senha = bcrypt.hashSync(senha, 10);
+
         const file = path.join('db', 'Usuarios.json');
 
         let listaUsuarios = {};
@@ -18,6 +22,10 @@ usuariosController = {
             // pegando array de inscritos e adicionando um novo email
             listaUsuarios.inscritos.push({nome,email,senha});
         } else {
+            listaUsuarios = {
+                inscritos: [{nome,email,senha}]
+            };
+
         }
 
         // transforma obj em JSON
