@@ -1,0 +1,47 @@
+<%- include('./partials/header') %>
+
+<main class="container text-center py-5 my-5">
+
+  <hr class="my-5">
+  <section>
+    <h3 class="mb-3" >Formulário de cadastro de usuário</h3>
+    <form action="/cadastroUsuario" method="POST">
+        <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" name="nome" id="nome" value="">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" value="">
+        </div>
+        <div class="form-group">
+            <label for="nome">Senha</label>
+            <input type="password" name="senha" id="senha" value="">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary">Salvar</button>
+        </div>
+    </form>
+  </section>
+
+  <hr class="my-5">
+  <section class="py-5">
+    <h3 class="mb-3" >Usuários cadastrados</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr class="row text-left">
+          <th class="col">nome</th>
+          <th class="col">email</th>
+          <th class="col">mensagem</th>
+          <th class="col-2">ações</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </section>
+
+  <a href="/" class="btn btn-secondary">voltar</a>
+
+</main>
+<%- include('./partials/footer') %> 

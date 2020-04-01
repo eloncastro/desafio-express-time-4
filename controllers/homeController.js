@@ -11,7 +11,8 @@ const homeController = {
 
     let banners = [
       '/imagens/banner.jpg', 
-      '/imagens/banner3.jpg', 
+      '/imagens/banner2.jpg',
+      '/imagens/fullstack-logo.jpg' 
     ];
 
     res.render(
@@ -21,64 +22,58 @@ const homeController = {
   },
   contato: (req, res) => {
     let {nome, email, mensagem} = req.body;
-    let datetime = new Date().getTime();
 
-    let infoContato = {nome, email, mensagem};
-    let infoContatoJSON = JSON.stringify(infoContato);
-   
-    const fileContato = path.join('db', 'Contatos.json');
-  
+    let infoContato = { nome, email, mensagem };
+
+    const fileContato = path.join('db', 'contato.json');
+    
     let listaContato = {};
     if(fs.existsSync(fileContato)){
-      // Trazendo conteúdo do arquivo em formato JSON
-      listaContato = fs.readFileSync(fileContato, {encoding: 'utf-8'});
-      // Transformando JSON em objeto
+      // trazendo conteudo do arquivo em formato JSON
+      listaContato = fs.readFileSync(fileContato, { encoding: 'utf-8'});
+      // transformando JSON em obj
       listaContato = JSON.parse(listaContato);
-      // Pegando array de inscritos e adicionando a um novo email
-      listaContato.contatos.push(infoContatoJSON);
-    }else{
+      // pegando array de inscritos e adicionando um novo email
+      listaContato.contatos.push(infoContato);
+    } else {
       listaContato = {
-        contatos: [infoContatoJSON]
+        contatos: [infoContato]
       };
     }
-    // Transformando obj em JSON
+    // transforma obj em JSON
     listaContato = JSON.stringify(listaContato);
     // guardando lista de inscritos com o novo email
     fs.writeFileSync(fileContato, listaContato);
-    
+
+    // -----
+
     res.render('contato', {nome, email, mensagem, title: 'Contato'});
   },
   newsletter: (req, res) => {
     let {email} = req.query;
-    let infoNewsletterJSON = JSON.stringify({email});
 
-    const fileNewsletter = path.join('db', 'Newsletter.json');
-
+    const fileNewsletter = path.join('db', 'newsletter.json');
+    
     let listaNewsletter = {};
     if(fs.existsSync(fileNewsletter)){
-      // Trazendo conteúdo do arquivo em formato JSON
-      listaNewsletter = fs.readFileSync(fileNewsletter, {encoding: 'utf-8'});
-      // Transformando JSON em objeto
+      // trazendo conteudo do arquivo em formato JSON
+      listaNewsletter = fs.readFileSync(fileNewsletter, { encoding: 'utf-8'});
+      // transformando JSON em obj
       listaNewsletter = JSON.parse(listaNewsletter);
-      // Pegando array de inscritos e adicionando a um novo email
+      // pegando array de inscritos e adicionando um novo email
       listaNewsletter.inscritos.push(email);
-    }else{
+    } else {
       listaNewsletter = {
         inscritos: [email]
       };
     }
-    // Transformando obj em JSON
+    // transforma obj em JSON
     listaNewsletter = JSON.stringify(listaNewsletter);
     // guardando lista de inscritos com o novo email
     fs.writeFileSync(fileNewsletter, listaNewsletter);
-
+    
     res.render('newsletter', {email, title: 'Newsletter'});
   }
 };
-
-    // POST - req.body
-    // GET - req.query
-    // GET /:email - req.params
-
 
 module.exports = homeController;

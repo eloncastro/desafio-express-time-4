@@ -2,11 +2,69 @@
 
 <main class="container text-center py-5 my-5">
 
-  <div class="alert  alert-success" role="alert">
-    <%= listaEmails %>
-  </div>
+    <hr class="my-5">
+  <section>
+    <h3 class="mb-3" >Newsletter</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr class="row">
+          <th class="col">email</th>
+          <th class="col">data</th>
+          <th class="col-2">ações</th>
+        </tr>
+      </thead>
+     <tbody>
+      <% for(let email of listaEmails) { %>
+        <tr class="row">
+          <td class="col">
+            <%= email %>
+          </td>
+          <td class="col">
+          
+          </td>
+          <td class="col-2">
+            <a href="#" class="btn btn-warning">editar</a>
+            <a href="#" class="btn btn-danger">excluir</a>
+          </td>
+        </tr>
+      <%  } %>
+     </tbody>
+    </table>
+  </section>
+  <section class="py-5">
+    <h3 class="mb-3" >Contato</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr class="row text-left">
+          <th class="col">nome</th>
+          <th class="col">email</th>
+          <th class="col">mensagem</th>
+          <th class="col-2">ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(let contato of listaContatos) { %>
+          <tr class="row">
+            <td class="col">
+              
+            </td>
+            <td class="col">
+              <a href="mailto:<%= contato.email %>"><%= contato.email %></a>
+            </td>
+            <td class="col">
+              
+            </td>
+            <td class="col-2">
+              <a href="#" class="btn btn-warning">editar</a>
+              <a href="#" class="btn btn-danger">excluir</a>
+            </td>
+          </tr>
+        <%  } %>
+      </tbody>
+    </table>
+  </section>
 
   <a href="/" class="btn btn-secondary">voltar</a>
 
 </main>
-<%- include('./partials/footer') %>
+<%- include('./partials/footer') %> 
